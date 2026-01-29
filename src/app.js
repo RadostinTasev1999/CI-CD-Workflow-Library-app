@@ -17,7 +17,7 @@ import { profilePage } from './views/profile.js';
 
 // This is a test comment
 // Another comment
-
+// Third comment
 const main = document.querySelector('main');
 setUserNav();
 document.getElementById('logoutBtn').addEventListener('click', logout);
