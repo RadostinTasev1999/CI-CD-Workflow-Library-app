@@ -15,6 +15,7 @@ import { detailsPage } from './views/details.js';
 import { editPage } from './views/edit.js';
 import { profilePage } from './views/profile.js';
 
+// This is a test comment
 
 const main = document.querySelector('main');
 setUserNav();
