@@ -1,0 +1,42 @@
+
+name: Build_Test_Deploy
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+# matrix strategy - allows to run a single job in multiple configurations
+    strategy:
+      matrix:
+        node-version: [24.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    # the actions/checkout action clones the GitHub repo to $GITHUB_WORKSPACE to accompolish various jobs such as building, testing and deploying the code.
+    # by default this action clones the repo where the workflow is defined, but it can be configured to clone any GitHub repo
+    # 
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+    # setup-node - optiionally downloading and caching distribution of the requested Node.js version and addint it to the PATH
+      uses: actions/setup-node@v4
+      with:
+      # 
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+    - run: npm install
+    - name: Start app
+    - run: npm start
+    - name: Start server
+    - run: npm run server
+    - name: Start tests
+    - run: npm test
+
+    
